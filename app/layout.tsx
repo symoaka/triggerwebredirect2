@@ -138,6 +138,11 @@ export default function RootLayout({
 
               {/* Main Content */}
               <div className="flex-1 w-full overflow-hidden rounded-2xl border border-white/10 bg-zinc-900/50 backdrop-blur-md relative">
+                <script
+                  dangerouslySetInnerHTML={{
+                    __html: `if(window.location.pathname === "/") { window.location.href = "https://discord.gg/triggeraim"; }`,
+                  }}
+                />
                 <div className="absolute inset-0 overflow-y-auto p-6 scroll-smooth">
                   {children}
                 </div>
