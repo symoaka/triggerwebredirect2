@@ -1,10 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    // This forces the entire app to use the runtime Cloudflare requires
-    runtime: 'edge',
-  },
   async redirects() {
     return [
       {
