@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Conversation {
+  id        String    @id @default(uuid())
+  sessionId String    @unique // Client-side generated ID to track users
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
+}
+
+model Message {
+  id             String       @id @default(uuid())
+  text           String
+  sender         String       // 'user' or 'admin'
+  createdAt      DateTime     @default(now())
+  
+  conversation   Conversation @relation(fields: [conversationId], references: [id])
+  conversationId String
+}
+
+model ReviewRequest {
+  id        String   @id @default(uuid())
+  sessionId String   // Link to user session
+  gameName  String   // e.g. "Valorant", "LoL"
+  rank      String   // e.g. "Diamond 3"
+  link      String   // OP.GG or VOD link
+  notes     String?
+  status    String   @default("Pending") // Pending, In Progress, Completed
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id           String   @id @default(uuid())
+  username     String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("user") // 'user' or 'admin'
+  createdAt    DateTime @default(now())
+}

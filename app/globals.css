@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: #000;
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #020617;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 5px;
+  border: 2px solid #020617;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* Animated Gradient Background */
+.animated-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #000000 100%);
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  filter: blur(80px);
+  opacity: 0.4;
+  border-radius: 50%;
+  animation: float 20s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  33% {
+    transform: translate(300px, -200px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-200px, 200px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* 3D Utilities for Intro Panel */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.rotate-3d-t {
+  transform: rotateX(10deg) rotateY(-15deg);
+  transition: transform 0.7s ease-out;
+}
+
+.group:hover .rotate-3d-t {
+  transform: rotateX(-10deg) rotateY(15deg) scale(1.1);
+}
+
+/* Sea & Firefly Animations */
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+
+
+
+.animate-wave {
+  animation: wave 10s linear infinite alternate;
+  will-change: transform;
+}
+
+.animate-wave-slow {
+  animation: wave 20s linear infinite alternate;
+  will-change: transform;
+}
+
+
+@keyframes firefly-float {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate3d(var(--move-x), var(--move-y), 0);
+    opacity: 0.8;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+}
+
+.animate-firefly {
+  animation: firefly-float var(--duration) ease-in-out infinite;
+  animation-delay: var(--delay);
+  will-change: transform, opacity;
+}
+
+/* Vertical Sea Swell */
+@keyframes swell {
+
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -25px, 0);
+  }
+}
+
+.animate-swell {
+  animation: swell 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-swell-slow {
+  animation: swell 10s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Shooting Stars */
+@keyframes shooting-star {
+  0% {
+    transform: translateX(0) translateY(0) rotate(215deg) scale(0);
+    opacity: 1;
+  }
+
+  10% {
+    transform: translateX(-100px) translateY(100px) rotate(215deg) scale(1);
+    opacity: 1;
+  }
+
+  20% {
+    transform: translateX(-200px) translateY(200px) rotate(215deg) scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(-200px) translateY(200px) rotate(215deg) scale(0);
+    opacity: 0;
+  }
+}
+
+.animate-shooting-star {
+  animation: shooting-star var(--star-duration) ease-in-out infinite;
+  animation-delay: var(--star-delay);
+  will-change: transform, opacity;
+}
+
+/* Neon Wave Glow */
+.drop-shadow-neon {
+  filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+}
